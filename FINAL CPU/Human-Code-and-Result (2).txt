@@ -1,0 +1,98 @@
+Enter number of lines of instructions: 26 
+Enter 26 lines of instructions: 
+irmov 0x1a %ebp	# "hard code" location of matrix 1â€™s starting address
+irmov $3 %eax	# "hard code" size of NxN array
+rrmov %eax %ecx	# move size of 1 dimension to %ecx
+mul %eax %ecx	# square dimension to find size of 1 matrix
+irmov $2 %edx	# prepare to double size of 1st matrix
+mul %edx %ecx	# double size of 1st matrix
+add %ebp %ecx	# store starting address for result matrix in %ecx
+rrmov %eax %edx	# store size N of matrix, to calculate offset
+mul %eax %edx	# calculate offset, N*N
+rrmov %ebp %esp	# begin calculating start address of 2nd matrix
+add %edx %esp	# finish calculating start address of 2nd matrix
+rrmov %ecx %eax	# begin calculating address to end at
+add %edx %eax	# finalize address to end at
+ldr %ebp %esi	# load first value of matrix 1
+ldr %esp %edi	# load first value of matrix 2
+add %esi %edi	# add values together
+str %edi %ecx	# store summed values in first address of result matrix
+irmov $1 %ebx	# store 1, in order to increment next addresses
+add %ebx %esp	# increment address for matrix 2
+add %ebx %ebp	# increment address for matrix 1
+add %ebx %ecx	# increment address for result matrix
+rrmov %eax %ebx	# prepare for calculation of program end
+sub %ecx %ebx	# check if we should stop looping
+jz 0x19		# if result is 0, stop looping
+jmp 0x0d	# otherwise jump back up
+halt		# stop program execution
+Instructions loaded successfully!
+Load a matrix? (y/n): y
+Check that the second instruction reflects the matrix size!!!
+Enter the size (N) of an NxN matrix: 3
+Enter the hex values of 9 elements for matrix 1:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Enter the hex values of 9 elements for matrix 2:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+v2.0 raw
+11a07
+10300
+20001
+70001
+10202
+70201
+60701
+20002
+70002
+20706
+60206
+20100
+60200
+30704
+30605
+60405
+50501
+10103
+60306
+60307
+60301
+20003
+c0103
+91900
+80d00
+a0000
+00001
+00002
+00003
+00004
+00005
+00006
+00007
+00008
+00009
+00001
+00002
+00003
+00004
+00005
+00006
+00007
+00008
+00009
+f0000
